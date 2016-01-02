@@ -99,8 +99,50 @@ ali@pluto:~/git/docker-course-02/busybox-01$ ls
 ```
 
 
+### Tutorial 4 - more run stuff
+
+New commands:
+
+`docker search -s <num> <term>`
+`docker stats <container>`
+`docker top <container>`
+
+`docker inspect --format '{{.Name}} {{.State.Running}}' <container>` -- uses Go Template format
 
 
+Labels:
+`docker run -itd --name <name01> --label=NodeNumber=3 --label=NodeType=cluster <imagename>` - labels appear in inspect - so they can be formatted - `--format '{{.Config.Labels.NodeType}}'`
+
+
+Setting limits in the container
+```
+cid=$(docker run -itd --ulimit nofile=1024:1024 --ulimit core=102400 --ulimit nproc=1000 --ulimit nice=100 --ulimit memlock=8196 --ulimit fsize=8192 --ulimit rss=4096 --ulimit cpu=4 --ulimit locks=1000 --ulimit sigpending=100 --ulimit msgqueue=1000 --ulimit nice=100 --ulimit rtprio=100 ubuntu)
+
+docker attach $cid
+ulimit -a
+
+root@b178068ba935:/# ulimit -a
+core file size          (blocks, -c) 100
+data seg size           (kbytes, -d) unlimited
+scheduling priority             (-e) 100
+file size               (blocks, -f) 8
+pending signals                 (-i) 100
+max locked memory       (kbytes, -l) 8
+max memory size         (kbytes, -m) 4
+open files                      (-n) 1024
+pipe size            (512 bytes, -p) 8
+POSIX message queues     (bytes, -q) 1000
+real-time priority              (-r) 100
+stack size              (kbytes, -s) 8192
+cpu time               (seconds, -t) 4
+max user processes              (-u) 1000
+virtual memory          (kbytes, -v) unlimited
+file locks                      (-x) 1000
+
+```
+
+
+### Tutorial 5 - Basic Networking
 
 
 
