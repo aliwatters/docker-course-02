@@ -59,6 +59,8 @@ VOLUME ["/src", "/config"]
 CMD ["/bin/bash"]
 ```
 
+Then build an image - `docker build -t unbuntu-vols-01 .`
+
 ```
 ali@pluto:~/git/docker-course-02/busybox-01$ docker run -it -v /test unbuntu-vols-01
 root@961e791ec381:/# ls
