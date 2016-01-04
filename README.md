@@ -145,4 +145,31 @@ file locks                      (-x) 1000
 ### Tutorial 5 - Basic Networking
 
 
+`docker run -P httpd` - run httpd image (apache) with high port to exposed port mapping
+`docker run -p 8080:80 httpd` - run httpd image with 8080 DNAT to port 80
 
+
+`docker exec <container> <cmd>` - runs a command on a container.
+
+docker adds in iptable rules in order to do this.
+
+### Tutorial 6 - Docker files part 1
+
+RUN - happens on build
+CMD - happens on start of container
+
+
+ENTRYPOINT - cannot be overridden
+CMD - can be overridden
+
+
+### Tutorial 7 - building out a wordpress container.
+
+``
+git clone git@github.com:tutumcloud/lamp.git
+cd lamp/
+docker build -t tutum/lamp .
+docker run -d -p 80:80 -p 3306:3306 tutum/lamp
+docker run -d -p 8085:80 -p 3306:3306 tutum/lamp
+69308f3d55067d510a3f67012656ee3119777eee976f9064cf2510708485001d
+```
